@@ -120,71 +120,22 @@
 
 
 //third
-// module.exports = function check(str, bracketsConfig) {
-
-//   // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
-//   let strArray = str.split('');
-//   if (strArray.length % 2 !== 0) return false;
-//   // console.log(strArray);
-//   bracketsConfig.forEach((e, i) => {
-//     if (e[0] === e[1]) {
-//       console.log(strArray[strArray.indexOf(e[0])]);
-//       console.log(strArray[strArray.indexOf(e[0], strArray.indexOf(e[0]) + 1)]);
-//       strArray[strArray.indexOf(e[0])] = `${i + 1}`;
-//       // strArray[strArray.indexOf(e[0], strArray.indexOf(e[0]) + 1)] = `${i + 2}`;
-//       strArray[strArray.indexOf(e[0])] = `${i + 2}`;
-//       e[0] = `${i + 1}`;
-//       e[1] = `${i + 2}`;
-//     }
-//   });
-//   console.log(strArray);
-
-
-
-//   let openSymbolsArray = bracketsConfig.map(e => e[0]);
-//   let closeSymbolsArray = bracketsConfig.map(e => e[1]);
-//   let compareArray = [];
-//   let openIndex = null;
-//   let closeIndex = null;
-
-//   for (let i = 0; i < strArray.length; i++) {
-//     openIndex = openSymbolsArray.indexOf(strArray[i]);
-//     if (openIndex !== -1) {
-//       compareArray.push(openIndex);
-//     }
-//     closeIndex = closeSymbolsArray.indexOf(strArray[i]);
-//     if (closeIndex !== -1) {
-//       openIndex = compareArray.pop();
-//       if (openIndex !== closeIndex) return false;
-//     }
-//   }
-//   if (compareArray.length === 0) {
-//     return true;
-//   } else return false;
-// }
-
-
-// third
-function check(str, bracketsConfig) {
+module.exports = function check(str, bracketsConfig) {
 
   // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
   let strArray = str.split('');
   if (strArray.length % 2 !== 0) return false;
-  // console.log(strArray);
+
   bracketsConfig.forEach((e, i) => {
-    if (e[0] === e[1]) {
-      console.log(strArray[strArray.indexOf(e[0])]);
-      console.log(strArray[strArray.indexOf(e[0], strArray.indexOf(e[0]) + 1)]);
-      strArray[strArray.indexOf(e[0])] = `${i + 1}`;
-      // strArray[strArray.indexOf(e[0], strArray.indexOf(e[0]) + 1)] = `${i + 2}`;
-      strArray[strArray.indexOf(e[0])] = `${i + 2}`;
-      e[0] = `${i + 1}`;
-      e[1] = `${i + 2}`;
+                    if (e[0] === e[1]) {
+                      strArray[strArray.indexOf(e[0])] = `${i + 1}`;
+                      strArray[strArray.indexOf(e[0])] = `${i + 2}`;
+                      e[0] = strArray[strArray.indexOf(e[0])];
+                      e[1] = strArray[strArray.indexOf(e[0])];
+                      console.log(e[0]);
+                      console.log(e[1]);
     }
   });
-  console.log(strArray);
-
-
 
   let openSymbolsArray = bracketsConfig.map(e => e[0]);
   let closeSymbolsArray = bracketsConfig.map(e => e[1]);
@@ -207,4 +158,46 @@ function check(str, bracketsConfig) {
     return true;
   } else return false;
 }
-console.log(check('|(|)', [['(', ')'], ['|', '|']]));
+
+
+// third
+// function check(str, bracketsConfig) {
+
+//   // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
+//   let strArray = str.split('');
+//   if (strArray.length % 2 !== 0) return false;
+
+//   bracketsConfig.forEach((e, i) => {
+//     if (e[0] === e[1]) {
+//       console.log(strArray[strArray.indexOf(e[0])]);
+//       console.log(strArray[strArray.indexOf(e[0], strArray.indexOf(e[0]) + 1)]);
+//       strArray[strArray.indexOf(e[0])] = `${i + 1}`;
+//       strArray[strArray.indexOf(e[0])] = `${i + 2}`;
+//       e[0] = `${i + 1}`;
+//       e[1] = `${i + 2}`;
+//     }
+//   });
+
+//   let openSymbolsArray = bracketsConfig.map(e => e[0]);
+//   let closeSymbolsArray = bracketsConfig.map(e => e[1]);
+//   let compareArray = [];
+//   let openIndex = null;
+//   let closeIndex = null;
+
+//   for (let i = 0; i < strArray.length; i++) {
+//     openIndex = openSymbolsArray.indexOf(strArray[i]);
+//     if (openIndex !== -1) {
+//       compareArray.push(openIndex);
+//     }
+//     closeIndex = closeSymbolsArray.indexOf(strArray[i]);
+//     if (closeIndex !== -1) {
+//       openIndex = compareArray.pop();
+//       if (openIndex !== closeIndex) return false;
+//     }
+//   }
+//   if (compareArray.length === 0) {
+//     return true;
+//   } else return false;
+// }
+// console.log(check('|(|)', [['(', ')'], ['|', '|']]));
+// console.log(check('8888877878887777777888888887777777887887788788887887777777788888888887788888', [['1', '2'], ['3', '4'], ['5', '6'], ['7', '7'], ['8', '8']]));
