@@ -120,61 +120,18 @@
 
 
 //third
-module.exports = function check(str, bracketsConfig) {
-
-  // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
-  let strArray = str.split('');
-  if (strArray.length % 2 !== 0) return false;
-
-  bracketsConfig.forEach((e, i) => {
-                    if (e[0] === e[1]) {
-                      strArray[strArray.indexOf(e[0])] = `${i + 1}`;
-                      strArray[strArray.indexOf(e[0])] = `${i + 2}`;
-                      e[0] = strArray[strArray.indexOf(e[0])];
-                      e[1] = strArray[strArray.indexOf(e[0])];
-                      console.log(e[0]);
-                      console.log(e[1]);
-    }
-  });
-
-  let openSymbolsArray = bracketsConfig.map(e => e[0]);
-  let closeSymbolsArray = bracketsConfig.map(e => e[1]);
-  let compareArray = [];
-  let openIndex = null;
-  let closeIndex = null;
-
-  for (let i = 0; i < strArray.length; i++) {
-    openIndex = openSymbolsArray.indexOf(strArray[i]);
-    if (openIndex !== -1) {
-      compareArray.push(openIndex);
-    }
-    closeIndex = closeSymbolsArray.indexOf(strArray[i]);
-    if (closeIndex !== -1) {
-      openIndex = compareArray.pop();
-      if (openIndex !== closeIndex) return false;
-    }
-  }
-  if (compareArray.length === 0) {
-    return true;
-  } else return false;
-}
-
-
-// third
-// function check(str, bracketsConfig) {
+// module.exports = function check(str, bracketsConfig) {
 
 //   // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
 //   let strArray = str.split('');
 //   if (strArray.length % 2 !== 0) return false;
 
 //   bracketsConfig.forEach((e, i) => {
-//     if (e[0] === e[1]) {
-//       console.log(strArray[strArray.indexOf(e[0])]);
-//       console.log(strArray[strArray.indexOf(e[0], strArray.indexOf(e[0]) + 1)]);
-//       strArray[strArray.indexOf(e[0])] = `${i + 1}`;
-//       strArray[strArray.indexOf(e[0])] = `${i + 2}`;
-//       e[0] = `${i + 1}`;
-//       e[1] = `${i + 2}`;
+//                     if (e[0] === e[1]) {
+//                       strArray[strArray.indexOf(e[0])] = `${i + 1}`;
+//                       strArray[strArray.indexOf(e[0])] = `${i + 2}`;
+//                       e[0] = strArray[strArray.indexOf(e[0])];
+//                       e[1] = strArray[strArray.indexOf(e[0])];
 //     }
 //   });
 
@@ -199,5 +156,105 @@ module.exports = function check(str, bracketsConfig) {
 //     return true;
 //   } else return false;
 // }
-// console.log(check('|(|)', [['(', ')'], ['|', '|']]));
-// console.log(check('8888877878887777777888888887777777887887788788887887777777788888888887788888', [['1', '2'], ['3', '4'], ['5', '6'], ['7', '7'], ['8', '8']]));
+
+
+// third
+// function check(str, bracketsConfig) {
+//   // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
+//   let strArray = str.split('');
+//   if (strArray.length % 2 !== 0) return false;
+
+//   bracketsConfig.forEach((e, i) => {
+//     if (e[0] === e[1]) {
+//       strArray[strArray.indexOf(e[0])] = `${i + 1}`;
+//       let tempEl = `${i + 1}`;
+//       strArray[strArray.indexOf(e[0])] = `${i + 2}`;
+//       let tempE2 = `${i + 2}`;
+//       // e[0] = strArray[strArray.indexOf(e[0])];
+//       // e[1] = strArray[strArray.indexOf(e[0])];
+//                 e[0] = tempEl;
+//                 e[1] = tempE2;
+//     }
+//   });
+
+//   let openSymbolsArray = bracketsConfig.map(e => e[0]);
+//   let closeSymbolsArray = bracketsConfig.map(e => e[1]);
+//   let compareArray = [];
+//   let openIndex = null;
+//   let closeIndex = null;
+
+//   for (let i = 0; i < strArray.length; i++) {
+//     openIndex = openSymbolsArray.indexOf(strArray[i]);
+//     if (openIndex !== -1) {
+//       compareArray.push(openIndex);
+//     }
+//     closeIndex = closeSymbolsArray.indexOf(strArray[i]);
+//     if (closeIndex !== -1) {
+//       openIndex = compareArray.pop();
+//       if (openIndex !== closeIndex) return false;
+//     }
+//   }
+//   if (compareArray.length === 0) {
+//     return true;
+//   } else return false;
+// }
+
+// let test10x = '|(|)';
+// let test10y = [['(', ')'], ['|', '|']];
+// let test12x = '((((([](((((((())))888888))))55778777787755556666777777777766)))))';
+// let test12y = [['1', '2'], ['3', '4'], ['5', '6'], ['7', '7'], ['8', '8']];
+// let test15x = '111115611111111156111111112222888888222255778777787755556666777777777766222221111222288888822225577877778775555666677777777776622222';
+// let test15y = [['1', '2'], ['3', '4'], ['5', '6'], ['7', '7'], ['8', '8']];
+// console.log(check(test10x, test10y));
+// console.log(check(test12x, test12y));
+// console.log(check(test15x, test15y));
+
+// module.exports = function check(str, bracketsConfig) {
+function check(str, bracketsConfig) {
+  // заменяем повторяющийся разделитель на уникальный сначала в str, потом в bracketsConfig
+  let strArray = str.split('');
+  if (strArray.length % 2 !== 0) return false;
+
+  bracketsConfig.forEach((e, i) => {
+    if (e[0] === e[1]) {
+      strArray[strArray.indexOf(e[0])] = `${i + 1}`;
+      let tempEl = `${i + 1}`;
+      strArray[strArray.indexOf(e[0])] = `${i + 2}`;
+      let tempE2 = `${i + 2}`; e[0] = tempEl;
+      e[0] = tempEl;
+      e[1] = tempE2;
+    }
+  });
+  console.log(bracketsConfig);
+
+  let openSymbolsArray = bracketsConfig.map(e => e[0]);
+  let closeSymbolsArray = bracketsConfig.map(e => e[1]);
+  let compareArray = [];
+  let openIndex = null;
+  let closeIndex = null;
+
+  for (let i = 0; i < strArray.length; i++) {
+    openIndex = openSymbolsArray.indexOf(strArray[i]);
+    if (openIndex !== -1) {
+      compareArray.push(openIndex);
+    }
+    closeIndex = closeSymbolsArray.indexOf(strArray[i]);
+    if (closeIndex !== -1) {
+      openIndex = compareArray.pop();
+      if (openIndex !== closeIndex) return false;
+    }
+  }
+  if (compareArray.length === 0) {
+    return true;
+  } else return false;
+}
+
+let test10x = '|(|)';
+let test10y = [['(', ')'], ['|', '|']];
+// let test12x = '((((([](((((((())))888888))))55778777787755556666777777777766)))))';
+// let test12y = [['1', '2'], ['3', '4'], ['5', '6'], ['7', '7'], ['8', '8']];
+// let test15x = '111115611111111156111111112222888888222255778777787755556666777777777766222221111222288888822225577877778775555666677777777776622222';
+// let test15y = [['1', '2'], ['3', '4'], ['5', '6'], ['7', '7'], ['8', '8']];
+console.log(check(test10x, test10y));
+// console.log(check(test12x, test12y));
+// console.log(check(test15x, test15y));
